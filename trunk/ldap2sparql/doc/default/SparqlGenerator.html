@@ -1,0 +1,798 @@
+<html>
+<head>
+<title>Docs For Class SparqlGenerator</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">default</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+  		  [ <a href="../classtrees_default.html" class="menu">class tree: default</a> ]
+		  [ <a href="../elementindex_default.html" class="menu">index: default</a> ]
+		  [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+      <b>Packages:</b><br />
+              <a href="../li_default.html">default</a><br />
+              <a href="../li_model.html">model</a><br />
+              <a href="../li_utility.html">utility</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../default/_Backend.php.html">		Backend.php
+		</a><br>
+			<a href="../default/_DataObject.php.html">		DataObject.php
+		</a><br>
+			<a href="../default/_htmlinterface.php.html">		htmlinterface.php
+		</a><br>
+			<a href="../default/_LdapParser.php.html">		LdapParser.php
+		</a><br>
+			<a href="../default/_LdapXmlParser.php.html">		LdapXmlParser.php
+		</a><br>
+			<a href="../default/_LdapXmlParser_neu.php.html">		LdapXmlParser_neu.php
+		</a><br>
+			<a href="../default/_LdifGenerator.php.html">		LdifGenerator.php
+		</a><br>
+			<a href="../default/_RdfAPI.php.html">		RdfAPI.php
+		</a><br>
+			<a href="../default/_searchresults.php.html">		searchresults.php
+		</a><br>
+			<a href="../default/_shell.php.html">		shell.php
+		</a><br>
+			<a href="../default/_Sparqler.php.html">		Sparqler.php
+		</a><br>
+			<a href="../default/_SparqlGenerator.php.html">		SparqlGenerator.php
+		</a><br>
+			<a href="../default/_user_functions.php.html">		user_functions.php
+		</a><br>
+	  </div><br />
+      
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../default/Backend.html">Backend</a><br />
+	    		<a href="../default/LdapParser.html">LdapParser</a><br />
+	    		<a href="../default/LdapXmlParser.html">LdapXmlParser</a><br />
+	    		<a href="../default/LdifGenerator.html">LdifGenerator</a><br />
+	    		<a href="../default/Sparqler.html">Sparqler</a><br />
+	    		<a href="../default/SparqlGenerator.html">SparqlGenerator</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: SparqlGenerator</h1>
+Source Location: /SparqlGenerator.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre></pre><br />
+<div class="description"></div><br /><br />
+
+
+
+
+
+
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../default/SparqlGenerator.html#var$dit_array">$dit_array</a></li>
+    <li><a href="../default/SparqlGenerator.html#var$existent_counter">$existent_counter</a></li>
+    <li><a href="../default/SparqlGenerator.html#var$LdapData">$LdapData</a></li>
+    <li><a href="../default/SparqlGenerator.html#var$mapping_array">$mapping_array</a></li>
+    <li><a href="../default/SparqlGenerator.html#var$mapping_intern">$mapping_intern</a></li>
+    <li><a href="../default/SparqlGenerator.html#var$options">$options</a></li>
+    <li><a href="../default/SparqlGenerator.html#var$prefix">$prefix</a></li>
+    <li><a href="../default/SparqlGenerator.html#var$ResourceVar">$ResourceVar</a></li>
+    <li><a href="../default/SparqlGenerator.html#var$variables">$variables</a></li>
+    <li><a href="../default/SparqlGenerator.html#var$Variable_Prefix">$Variable_Prefix</a></li>
+    <li><a href="../default/SparqlGenerator.html#var$verbose">$verbose</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../default/SparqlGenerator.html#methodSparqlGenerator">SparqlGenerator</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgenerateItemClause">generateItemClause</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgeneratePrefixDecl">generatePrefixDecl</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgenerateProlog">generateProlog</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgenerateQuery">generateQuery</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgenerateQueryPreamble">generateQueryPreamble</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgenerateSelectClause">generateSelectClause</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgenerateSolutionModifier">generateSolutionModifier</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgenerateUrl">generateUrl</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgenerateWhereClause">generateWhereClause</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgetAnfValue">getAnfValue</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgetMappingResources">getMappingResources</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgetPrefixedValue">getPrefixedValue</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodgetTaggedValue">getTaggedValue</a></li>
+    <li><a href="../default/SparqlGenerator.html#methodparseFilterArray">parseFilterArray</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+
+
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 10]<br />
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$dit_array"></a>
+	<p></p>
+	<h4>$dit_array = <span class="value">array(&quot;parent&quot;&nbsp;=&gt;&nbsp;&quot;ldap:hasParent&quot;,&nbsp;&quot;child&quot;&nbsp;=&gt;&nbsp;&quot;ldap:hasChild&quot;)</span></h4>
+	<p>[line 16]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$existent_counter"></a>
+	<p></p>
+	<h4>$existent_counter = <span class="value">&nbsp;0</span></h4>
+	<p>[line 18]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$LdapData"></a>
+	<p></p>
+	<h4>$LdapData = <span class="value"></span></h4>
+	<p>[line 26]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$mapping_array"></a>
+	<p></p>
+	<h4>$mapping_array = <span class="value">array(&quot;objectclass&quot;&nbsp;=&gt;&nbsp;&quot;rdf:type&quot;)</span></h4>
+	<p>[line 15]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$mapping_intern"></a>
+	<p></p>
+	<h4>$mapping_intern = <span class="value">&nbsp;false</span></h4>
+	<p>[line 14]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$options"></a>
+	<p></p>
+	<h4>$options = <span class="value"></span></h4>
+	<p>[line 13]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$prefix"></a>
+	<p></p>
+	<h4>$prefix = <span class="value">array(&quot;ldap&quot;&nbsp;=&gt;&nbsp;&quot;http://purl.org/net/ldap#&quot;,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;rdf&quot;&nbsp;=&gt;&nbsp;&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span></h4>
+	<p>[line 21]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$ResourceVar"></a>
+	<p></p>
+	<h4>$ResourceVar = <span class="value">&nbsp;&quot;&quot;</span></h4>
+	<p>[line 25]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$variables"></a>
+	<p></p>
+	<h4>$variables = <span class="value">array(&quot;Res&quot;,&nbsp;&quot;Attr&quot;,&nbsp;&quot;Val&quot;)</span></h4>
+	<p>[line 24]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$Variable_Prefix"></a>
+	<p></p>
+	<h4>$Variable_Prefix = <span class="value">&nbsp;&quot;_v&quot;</span></h4>
+	<p>[line 17]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$verbose"></a>
+	<p></p>
+	<h4>$verbose = <span class="value">&nbsp;false</span></h4>
+	<p>[line 12]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
+
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+
+  <hr />
+	<a name="methodSparqlGenerator"></a>
+	<h3>constructor SparqlGenerator <span class="smalllinenumber">[line 28]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>SparqlGenerator SparqlGenerator(
+
+$options, 
+$is_mapping, 
+$verbose)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$options</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$is_mapping</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$verbose</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgenerateItemClause"></a>
+	<h3>method generateItemClause <span class="smalllinenumber">[line 223]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void generateItemClause(
+
+$itemArray, 
+$negation)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$itemArray</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$negation</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgeneratePrefixDecl"></a>
+	<h3>method generatePrefixDecl <span class="smalllinenumber">[line 326]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void generatePrefixDecl(
+
+$prefix)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$prefix</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgenerateProlog"></a>
+	<h3>method generateProlog <span class="smalllinenumber">[line 354]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void generateProlog(
+
+$base, 
+$prefix)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$base</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$prefix</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgenerateQuery"></a>
+	<h3>method generateQuery <span class="smalllinenumber">[line 359]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void generateQuery(
+
+$ldapData)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ldapData</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgenerateQueryPreamble"></a>
+	<h3>method generateQueryPreamble <span class="smalllinenumber">[line 94]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void generateQueryPreamble(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgenerateSelectClause"></a>
+	<h3>method generateSelectClause <span class="smalllinenumber">[line 336]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void generateSelectClause(
+
+$filterData)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$filterData</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgenerateSolutionModifier"></a>
+	<h3>method generateSolutionModifier <span class="smalllinenumber">[line 343]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void generateSolutionModifier(
+
+$ordered, 
+$order_var, 
+$limit)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ordered</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$order_var</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$limit</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgenerateUrl"></a>
+	<h3>method generateUrl <span class="smalllinenumber">[line 77]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void generateUrl(
+
+$dn)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$dn</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgenerateWhereClause"></a>
+	<h3>method generateWhereClause <span class="smalllinenumber">[line 140]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void generateWhereClause(
+
+$filterData)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$filterData</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetAnfValue"></a>
+	<h3>method getAnfValue <span class="smalllinenumber">[line 401]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void getAnfValue(
+
+$value)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$value</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetMappingResources"></a>
+	<h3>method getMappingResources <span class="smalllinenumber">[line 66]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void getMappingResources(
+
+$ldapAttr)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$ldapAttr</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetPrefixedValue"></a>
+	<h3>method getPrefixedValue <span class="smalllinenumber">[line 393]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void getPrefixedValue(
+
+$prefix, 
+$value)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$prefix</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$value</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetTaggedValue"></a>
+	<h3>method getTaggedValue <span class="smalllinenumber">[line 397]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void getTaggedValue(
+
+$prefixUrl, 
+$value)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$prefixUrl</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$value</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodparseFilterArray"></a>
+	<h3>method parseFilterArray <span class="smalllinenumber">[line 145]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void parseFilterArray(
+
+$filterArrayComponent, 
+$unionType, 
+$negation)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$filterArrayComponent</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$unionType</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+          <tr>
+        <td class="type">&nbsp;&nbsp;</td>
+        <td><b>$negation</b>&nbsp;&nbsp;</td>
+        <td></td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Sun, 29 Oct 2006 19:38:42 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.3.1</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
