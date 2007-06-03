@@ -7,7 +7,7 @@
  */
 
 #define("RDFAPI_INCLUDE_DIR", '/home/seebi/projects/powl/trunk/ldap2sparql/api/');
-define("RDFAPI_INCLUDE_DIR", './api/');
+define("RDFAPI_INCLUDE_DIR", REAL_BASE.'api/');
 require_once RDFAPI_INCLUDE_DIR . 'RdfAPI.php';
 require_once RDFAPI_INCLUDE_DIR . 'sparql/SPARQL.php';
 
@@ -52,9 +52,9 @@ class Backend {
 //		}
 		
 		if (isset($iniFile))
-		  $this->global_options = parse_ini_file('ini/'.$iniFile, true);
+		  $this->global_options = parse_ini_file(REAL_BASE.'ini/'.$iniFile, true);
 		else
-			die("No INI File!"); 
+			die("No INI File $iniFile!"); 
 		
 		if ($this -> verbose) printr($this->global_options);
 
@@ -71,7 +71,7 @@ class Backend {
 		if ($this->global_options["MAPPING"]["mapping_file"] != "") {
 			if ($this -> verbose)
 				echo ("mapping file imported: ".$this->global_options["MAPPING"]["mapping_file"]. "<p/>\n");
-			$sparql_options["MAPPING"] = parse_ini_file('ini/'.$this->global_options["MAPPING"]["mapping_file"], true);
+			$sparql_options["MAPPING"] = parse_ini_file(REAL_BASE.'ini/'.$this->global_options["MAPPING"]["mapping_file"], true);
 
 			if ($this -> verbose) {
 				print_r ("<pre>");
@@ -96,7 +96,7 @@ class Backend {
 
 		$this->parser = new LdapParser($this -> verbose);
 		$this->sparqlGenerator = new SparqlGenerator($sparql_options, $mapping, $this -> verbose);
-		$this->sparqler = new Sparqler($this->global_options["SPARQL_ENDPOINT"], $this->verbose);
+		$this->sparqler = new Sparqler($this->global_options["BACKEND"], $this->verbose);
 			
 		$this->ldif = new LdifGenerator($ldif_options, $mapping, $this -> verbose);
 		
@@ -146,6 +146,9 @@ class Backend {
 		$filterString = $request["filter"];
 		$attributes = $request["attrs"];
 
+
+		$backendMode = $this->global_options["BACKEND"]["mode"];
+		$mappingMode = $this->global_options["MAPPING"]["mapping"];
 		try {
 			$parserResult = $this->parser -> parse($filterString);	
 
@@ -155,41 +158,56 @@ class Backend {
 			$this -> LdapQueryArray["Scope"] = $request["scope"];
 			$this -> LdapQueryArray = array_merge($this -> LdapQueryArray, $parserResult);
 
-			if ($this->global_options["MAPPING"]["mapping"] != "external") {
+			if ($mappingMode == "internal") {
 				if ($this->verbose)
 					echo "Internal Mapping : complete query";	
 				// Internal mapping -> No complete URIs -> Slower all in one query necessary
-				$sparqlString = $this->sparqlGenerator -> generateQuery($this -> LdapQueryArray, true);
-		
-				#$sparqlResult = $this->sparqler->doQueryCURL($sparqlString);
-		
-				#$rap_array = $this -> ldif -> generateRapArray($sparqlResult);
-				$rap_array = $this->sparqler->doQueryRAP($sparqlString);
+				$sparqlString = $this->sparqlGenerator ->generateQuery($this -> LdapQueryArray, true);
+				if (isset($GLOBALS['loghandle'])) fwrite($GLOBALS['loghandle'], "$sparqlString\n");
+
+				if ($backendMode == "rapmysql") {
+					$rap_array = $this->sparqler->doQueryRAP($sparqlString);
+					if ($this->verbose) print_r($rap_array);
+				} elseif ($backendMode == "endpoint") {
+					$sparqlResult = $this->sparqler->doQueryCURL($sparqlString);
+					$rap_array = $this -> ldif -> generateRapArray($sparqlResult);
+				} else
+					die ("Unknown Backend mode '$mode'!");
 
 				#echo "ENTRY : ". $entry ."<p/";	
 				$ldifString = $this->ldif -> generateLdif($rap_array, $this -> LdapQueryArray["Attr"]);
 			}
-			else {
+			elseif ($mappingMode == "external") {
 				// External mapping
 				$sparqlString = $this->sparqlGenerator -> generateQuery($this -> LdapQueryArray, false);
+				if (isset($GLOBALS['loghandle'])) fwrite($GLOBALS['loghandle'], "$sparqlString\n");
 
-				$sparqlResult = $this->sparqler->doQueryCURL($sparqlString);
-				$rap_array = $this -> ldif -> generateRapArray($sparqlResult);
-				#$rap_array = $this->sparqler->doQueryRAP($sparqlString);
+				if ($backendMode == "rapmysql") {
+					$rap_array = $this->sparqler->doQueryRAP($sparqlString);
+				} elseif ($backendMode == "endpoint") {
+					$sparqlResult = $this->sparqler->doQueryCURL($sparqlString);
+					$rap_array = $this -> ldif -> generateRapArray($sparqlResult);
+				} else
+					die ("Unknown Backend mode '$backendMode'!");
 
 				for ($entries=0;$entries < count($rap_array);$entries++) {
 					$entry = $rap_array[$entries]["?Res"]->getURI();
 					$entrySparql = 'SELECT ?Attr ?Val WHERE {<'.$entry.'> ?Attr ?Val}';
 					if ($this->verbose)
 						echo "Entrysparql : ". htmlentities($entrySparql) ."<p/";
+
+				if ($backendMode == "rapmysql") {
+					$rap_array2 = $this->sparqler->doQueryRAP($entrySparql);
+				} elseif ($backendMode == "endpoint") {
+					$finalResult = $this->sparqler->doQueryCURL($entrySparql);
+					$rap_array2 = $this -> ldif -> generateRapArray($finalResult);
+				} else
+					die ("Unknown Backend mode '$backendMode'!");
 				
-					$finalResult = $this->sparqler->doQueryCURL($entrySparql); 
-				  $rap_array2 = $this -> ldif -> generateRapArray($finalResult);
-					#$rap_array2 = $this->sparqler->doQueryRAP($entrySparql);
-				
-				  $ldifString .= $this -> ldif -> generateEntry($entry, $rap_array2,$this -> LdapQueryArray["Attr"]);
+				 $ldifString .= $this -> ldif -> generateEntry($entry, $rap_array2,$this -> LdapQueryArray["Attr"]);
 				}
-			}	
+			} else
+				die ("Unknown Mapping mode '$mappingMode'!");
 		//$ldifString = $this -> ldif -> generateXmlLdif($sparqlResult, $this -> LdapQueryArray["Attr"]);
 		}
 		catch (Exception $e) {
