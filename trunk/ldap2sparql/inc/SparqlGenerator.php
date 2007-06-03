@@ -292,7 +292,7 @@
  		
 			
 
-	 		if ($this -> verbose) print_r("ReturnString: $returnString <p/> \n");
+	 		if ($this -> verbose) print_r("ReturnString: ".htmlentities($returnString). "<br />\n");
  		}	
  		return $returnString;	 
 	}
@@ -596,12 +596,10 @@
 		
 		$query = $prolog.$select_clause.$where_clause.$modifier_clause;
 		
-		if ($this -> verbose) {
-		print "<pre>";
-		print($query);		
-		print "</pre>";
-		} 
-	
+		if ($this -> verbose)
+			print "<pre>".htmlentities($query)."</pre>";
+
+		if (isset($GLOBALS['loghandle'])) fwrite($GLOBALS['loghandle'], "$sparqlString\n");
 		return $query;	
   }
  

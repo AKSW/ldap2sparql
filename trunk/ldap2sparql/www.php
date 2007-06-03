@@ -5,6 +5,7 @@
  * To change the template for this generated file go to
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
+define('REAL_BASE', str_replace('\\', '/', dirname(__FILE__)) . '/');
 include("inc/Backend.php");
 
 if ($_POST['inifile']) {
@@ -36,7 +37,7 @@ else {
 		</tr>
 		<tr>
 			<td>ini-file:</td>
-			<td><input type="text" name="inifile" value="backend_ex_biz.ini" size="40" maxlength="40"/> </td>  
+			<td><input type="text" name="inifile" value="default.ini" size="40" maxlength="40"/> </td>  
 		</tr>
 		<tr>
 			<td colspan = "2">

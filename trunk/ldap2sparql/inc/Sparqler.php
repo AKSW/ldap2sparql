@@ -47,18 +47,18 @@
  	 */
 	function doQueryRAP($query) {
 		$GLOBALS['dbConf']['type'] = 'MySQL';
-		$GLOBALS['dbConf']['host'] = 'localhost';
-		$GLOBALS['dbConf']['database'] = 'ontowiki';
-		$GLOBALS['dbConf']['user'] = 'root';
-		$GLOBALS['dbConf']['password'] = 'root';
+		$GLOBALS['dbConf']['host'] = $this->options["host"];
+		$GLOBALS['dbConf']['database'] = $this->options["db"];
+		$GLOBALS['dbConf']['user'] = $this->options["user"];
+		$GLOBALS['dbConf']['password'] = $this->options["pass"];
 
 		$database = ModelFactory::getDbStore(
 			$GLOBALS['dbConf']['type'],     $GLOBALS['dbConf']['host'],
 			$GLOBALS['dbConf']['database'], $GLOBALS['dbConf']['user'],
 			$GLOBALS['dbConf']['password']
 		);
-		$dbModel  = $database->getModel("ldap://ldap.seerose.biz/");
-		#$dbModel  = $database->getModel("http://3ba.se/conferences/");
+
+		$dbModel  = $database->getModel($this->options["model"]);
 		$result = $dbModel->sparqlQuery($query);
 		#var_dump($result);
 		return $result;
@@ -81,23 +81,20 @@
 			$url = "http://".$this->options["server"]."?query=".urlencode($query);
 			
 			if (isset($this->options["defaultgraph"]) && $this->options["defaultgraph"] != "") {
-				if (preg_match('[^:]+', $this->options["defaultgraph"])) {
-					echo 'Local: ---'.$this->options["defaultgraph"].'---';
-					$file = 'file:' . dirname($_SERVER['SCRIPT_FILENAME']) .'/data/'. $this->options["defaultgraph"];
+				if (ereg("^[^:]+$", $this->options["defaultgraph"])) {
+					if ($this -> verbose) echo 'FileURI Local: '.$this->options["defaultgraph"]."<br />\n";
+					$file = 'file:' . REAL_BASE . '/data/'. $this->options["defaultgraph"];
 					$url .= "&default-graph-uri=".urlencode($file);				
 				} else {
-					echo 'AsGiven: ---'.$this->options["defaultgraph"].'---';
+					if ($this -> verbose) echo 'File URI AsGiven: '.$this->options["defaultgraph"]."<br />\n";
 					$url .= "&default-graph-uri=".urlencode($this->options["defaultgraph"]);									
 				}
 			}
 			
 			if ($this -> verbose) print_r("HTTP GET: ".$url."<p/> \n");
 
-			if (isset($this->options["xml_temp_file"])) {
-				if (!$temp_xml = fopen($this->options["xml_temp_file"], "w+"))
-					throw new Exception(80,80);
-			} else
-				$temp_xml = tmpfile();
+			if (!$temp_xml = fopen(REAL_BASE."log/lastresult.xml", "w+"))
+				die ("Could not open ".REAL_BASE."log/lastresult.xml for writing ...\n");
 
 			$ch = curl_init($url);
 			curl_setopt($ch, CURLOPT_HEADER, 0);

@@ -6,13 +6,17 @@
  * @package backend
  * 
  */
+
+// ini file to use
+$ini = "default.ini";
+
+define('REAL_BASE', str_replace('\\', '/', dirname(__FILE__)) . '/');
  include("inc/Backend.php");
  
  # create the logfile handle
-$loghandle = fopen ("log/shellback.log", "a")
+$loghandle = fopen (REAL_BASE.'log/shellback.log', 'a')
 	or die("Can not open Logfile!\n");
-$log2 = fopen ("log/mylog.log", "a")
-	or die("Can not open Logfile!\n");
+$GLOBALS['loghandle'] = $loghandle;
 
 fwrite($loghandle, "STARTING\n");
 
@@ -26,17 +30,18 @@ do {
 	{
 		$tmpa = split(": ", $line);
 		$request[$tmpa[0]] = $tmpa[1];
-		fwrite($log2, $request[$tmpa[0]]."\n");	
+		fwrite($loghandle, $request[$tmpa[0]]."\n");	
 	}
 } while ($line != "");
 
-$back = new Backend(false, $argv[1]);
+$back = new Backend(false, $ini);
 $ldif = $back->search($request);
-fwrite($log2, $ldif);
-#echo $ldif;
+fwrite($loghandle, $ldif);
+echo $ldif;
 
 #echo "dn: dc=ttt,ou=ldap2sparql,dc=localdomain\n".
 #	"dc: ttt\n".
 #	"objectClass: domain\n\n";
+fclose($loghandle);
 
 ?>
