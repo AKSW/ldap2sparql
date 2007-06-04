@@ -414,8 +414,6 @@ class LdifGenerator {
 		print "</pre>";	
 		}
 
-
-		
 		$cur_x = $results[0]["?Res"]->getUri();
 		$newResTriple = $results[0];
 		do {

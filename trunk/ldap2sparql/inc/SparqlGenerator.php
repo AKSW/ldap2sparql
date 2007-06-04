@@ -289,8 +289,6 @@
  	 			}
 	  	 		
 			$counter++; 	 		
- 		
-			
 
 	 		if ($this -> verbose) print_r("ReturnString: ".htmlentities($returnString). "<br />\n");
  		}	
@@ -543,7 +541,8 @@
  	
  	private function generateWhereClause($filterData, $attributes_values) {
  		$returnString = "WHERE {\n{ ".$this -> parseFilterArray($this->LdapData["Filter"], false, false)." . ".$this->generateBaseScope()." }\n"; 
- 		if ($attributes_values && (!$this->mapping_intern || $this -> LdapData["Base"] == $this->options["BASE"] || $this->LdapData["Scope"] == 0))
+		# ToDo: Whats about this?
+ 		#if ($attributes_values && (!$this->mapping_intern || $this -> LdapData["Base"] == $this->options["BASE"] || $this->LdapData["Scope"] == 0))
  			$returnString	.= '?'.$this->variables[0].' ?'.$this->variables[1].' ?'.$this->variables[2];
  		return $returnString. " }\n";
  	}	

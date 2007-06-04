@@ -164,6 +164,8 @@ class Backend {
 				// Internal mapping -> No complete URIs -> Slower all in one query necessary
 				$sparqlString = $this->sparqlGenerator ->generateQuery($this -> LdapQueryArray, true);
 				if (isset($GLOBALS['loghandle'])) fwrite($GLOBALS['loghandle'], "$sparqlString\n");
+				if ($GLOBALS['wwwoutput']) echo "<h2 id='sparql'>Generated SPARQL Query</h2><pre>".htmlentities($sparqlString)."</pre>";
+
 
 				if ($backendMode == "rapmysql") {
 					$rap_array = $this->sparqler->doQueryRAP($sparqlString);
@@ -176,6 +178,7 @@ class Backend {
 
 				#echo "ENTRY : ". $entry ."<p/";	
 				$ldifString = $this->ldif -> generateLdif($rap_array, $this -> LdapQueryArray["Attr"]);
+				if ($GLOBALS['wwwoutput']) echo "<h2 id='ldif'>LDAP RESULT</h2><pre>".htmlentities($ldifString)."</pre>";
 			}
 			elseif ($mappingMode == "external") {
 				// External mapping
